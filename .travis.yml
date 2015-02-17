@@ -1,0 +1,5 @@
+language: java
+
+after_success:
+  - mvn sonar:sonar
+  - ls
