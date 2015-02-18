@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/estebanwasinger/slack-sdk.svg?branch=master)](https://travis-ci.org/estebanwasinger/slack-sdk)
+
 # Slack Java SDK
 
 ## Slack API compatibility
