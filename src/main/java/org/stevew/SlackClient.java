@@ -38,7 +38,7 @@ public class SlackClient {
         return output;
     }
 
-    public Boolean isConnected(){
+    public Boolean isConnected() {
         String output = RestUtils.sendRequest(getURL(Operations.AUTH_TEST));
         JSONObject slackResponse = new JSONObject(output);
         return slackResponse.getBoolean("ok");
@@ -126,22 +126,22 @@ public class SlackClient {
         System.out.println(listType.toString());
         return mapper.fromJson(slackResponse.toString(), listType);
     }
-    
-    public Channel createChannel(String channelName){
+
+    public Channel createChannel(String channelName) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHANNELS_CREATE);
-        request.addArgument("name",channelName);
+        request.addArgument("name", channelName);
         String output = RestUtils.sendRequest(request);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
         return mapper.fromJson(slackResponse.toString(), Channel.class);
     }
-    
-    public Channel renameChannel(String channelId, String newName){
+
+    public Channel renameChannel(String channelId, String newName) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHANNELS_RENAME);
-        request.addArgument("channel",channelId);
-        request.addArgument("name",newName);
+        request.addArgument("channel", channelId);
+        request.addArgument("name", newName);
         String output = RestUtils.sendRequest(request);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -159,16 +159,16 @@ public class SlackClient {
         return mapper.fromJson(output, MessageResponse.class);
     }
 
-    public Boolean leaveChannel(String channelId){
+    public Boolean leaveChannel(String channelId) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHANNELS_LEAVE);
-        request.addArgument("channel",channelId);
+        request.addArgument("channel", channelId);
         String output = RestUtils.sendRequest(request);
 
         return new JSONObject(output).getBoolean("ok");
     }
-    
-    public String openDirectMessageChannel(String userId){
+
+    public String openDirectMessageChannel(String userId) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.IM_OPEN);
         request.addArgument("user", userId);
@@ -176,7 +176,7 @@ public class SlackClient {
         return output;
     }
 
-    public String listDirectMessageChannels(){
+    public String listDirectMessageChannels() {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.IM_LIST);
         request.enablePretty();
@@ -184,10 +184,10 @@ public class SlackClient {
         return output;
     }
 
-    public Channel joinChannel(String channelName){
+    public Channel joinChannel(String channelName) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHANNELS_JOIN);
-        request.addArgument("name",channelName);
+        request.addArgument("name", channelName);
         String output = RestUtils.sendRequest(request);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -214,8 +214,8 @@ public class SlackClient {
     private String getURL(String operation) {
         return "https://slack.com/api/" + operation + "?token=" + token;
     }
-    
-    private SlackRequest createAuthorizedRequest(){
+
+    private SlackRequest createAuthorizedRequest() {
         return RestUtils.newRequest(token);
     }
 }

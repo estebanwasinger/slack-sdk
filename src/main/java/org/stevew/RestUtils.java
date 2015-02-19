@@ -37,7 +37,7 @@ public class RestUtils {
     }
 
 
-    public static SlackRequest newRequest(String token){
+    public static SlackRequest newRequest(String token) {
         return new SlackRequest(token);
     }
 }

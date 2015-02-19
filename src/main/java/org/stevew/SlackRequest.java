@@ -12,25 +12,25 @@ import java.util.Map;
 public class SlackRequest {
 
     private String operation;
-    private Map<String,String> arguments;
+    private Map<String, String> arguments;
     private String token;
 
-    public SlackRequest(String token){
-        arguments = new HashMap<String,String>();
+    public SlackRequest(String token) {
+        arguments = new HashMap<String, String>();
         this.token = token;
     }
 
     public String getOperation() {
         return operation;
     }
-    
+
     public SlackRequest setOperation(String operation) {
         this.operation = operation;
         return this;
     }
 
-    public SlackRequest addArgument(String argName, String argValue){
-        if(argValue == null){
+    public SlackRequest addArgument(String argName, String argValue) {
+        if (argValue == null) {
             return this;
         }
         try {
@@ -41,13 +41,13 @@ public class SlackRequest {
         return this;
     }
 
-    public SlackRequest enablePretty(){
-        arguments.put("pretty","1");
+    public SlackRequest enablePretty() {
+        arguments.put("pretty", "1");
         return this;
     }
 
     public String createUrl() {
-        String url = "https://slack.com/api/" + operation + "?token="+token;
+        String url = "https://slack.com/api/" + operation + "?token=" + token;
         for (Map.Entry<String, String> entry : arguments.entrySet()) {
             url = url.concat("&" + entry.getKey() + "=" + entry.getValue());
         }

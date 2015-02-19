@@ -5,8 +5,9 @@ package org.stevew;
  */
 public class Operations {
     public static final String USER_INFO = "users.info";
-    public static final String CHANNELS_LIST ="channels.list";
-    public static final String CHANNELS_HISTORY ="channels.history";
+    public static final String USER_LIST = "users.list";
+    public static final String CHANNELS_LIST = "channels.list";
+    public static final String CHANNELS_HISTORY = "channels.history";
     public static final String CHANNELS_INFO = "channels.info";
     public static final String CHANNELS_CREATE = "channels.create";
     public static final String CHANNELS_RENAME = "channels.rename";

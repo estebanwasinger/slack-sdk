@@ -16,63 +16,51 @@ public class Message {
 
     private String type;
 
-    public String getUsername ()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername (String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getText ()
-    {
+    public String getText() {
         return text;
     }
 
-    public void setText (String text)
-    {
+    public void setText(String text) {
         this.text = text;
     }
 
-    public String getTs ()
-    {
+    public String getTs() {
         return ts;
     }
 
-    public void setTs (String ts)
-    {
+    public void setTs(String ts) {
         this.ts = ts;
     }
 
-    public String getSubtype ()
-    {
+    public String getSubtype() {
         return subtype;
     }
 
-    public void setSubtype (String subtype)
-    {
+    public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
-    public Icons getIcons ()
-    {
+    public Icons getIcons() {
         return icons;
     }
 
-    public void setIcons (Icons icons)
-    {
+    public void setIcons(Icons icons) {
         this.icons = icons;
     }
 
-    public String getType ()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType (String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 }

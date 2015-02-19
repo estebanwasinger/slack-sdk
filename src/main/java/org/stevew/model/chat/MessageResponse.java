@@ -12,43 +12,35 @@ public class MessageResponse {
 
     private String channel;
 
-    public Message getMessage ()
-    {
+    public Message getMessage() {
         return message;
     }
 
-    public void setMessage (Message message)
-    {
+    public void setMessage(Message message) {
         this.message = message;
     }
 
-    public String getTs ()
-    {
+    public String getTs() {
         return ts;
     }
 
-    public void setTs (String ts)
-    {
+    public void setTs(String ts) {
         this.ts = ts;
     }
 
-    public String getOk ()
-    {
+    public String getOk() {
         return ok;
     }
 
-    public void setOk (String ok)
-    {
+    public void setOk(String ok) {
         this.ok = ok;
     }
 
-    public String getChannel ()
-    {
+    public String getChannel() {
         return channel;
     }
 
-    public void setChannel (String channel)
-    {
+    public void setChannel(String channel) {
         this.channel = channel;
     }
 }

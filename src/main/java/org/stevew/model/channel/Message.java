@@ -14,53 +14,43 @@ public class Message {
 
     private String user;
 
-    public String getText ()
-    {
+    public String getText() {
         return text;
     }
 
-    public void setText (String text)
-    {
+    public void setText(String text) {
         this.text = text;
     }
 
-    public String getTs ()
-    {
+    public String getTs() {
         return ts;
     }
 
-    public void setTs (String ts)
-    {
+    public void setTs(String ts) {
         this.ts = ts;
     }
 
-    public String getSubtype ()
-    {
+    public String getSubtype() {
         return subtype;
     }
 
-    public void setSubtype (String subtype)
-    {
+    public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
-    public String getType ()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType (String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getUser ()
-    {
+    public String getUser() {
         return user;
     }
 
-    public void setUser (String user)
-    {
+    public void setUser(String user) {
         this.user = user;
     }
 }
