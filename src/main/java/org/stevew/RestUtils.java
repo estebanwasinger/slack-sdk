@@ -9,6 +9,9 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class RestUtils {
 
+    private RestUtils() {
+    }
+
     public static String sendRequest(String url) {
         WebResource webResource = new Client().resource(url);
 

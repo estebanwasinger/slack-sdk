@@ -123,7 +123,6 @@ public class SlackClient {
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("messages");
         Type listType = new TypeToken<ArrayList<Message>>() {
         }.getType();
-        System.out.println(listType.toString());
         return mapper.fromJson(slackResponse.toString(), listType);
     }
 

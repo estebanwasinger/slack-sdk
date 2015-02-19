@@ -26,11 +26,11 @@ public class User {
 
     private Profile profile;
 
-    public String getIs_ultra_restricted() {
+    public String getIsUltraRestricted() {
         return is_ultra_restricted;
     }
 
-    public void setIs_ultra_restricted(String is_ultra_restricted) {
+    public void setIsUltraRestricted(String is_ultra_restricted) {
         this.is_ultra_restricted = is_ultra_restricted;
     }
 
@@ -42,35 +42,35 @@ public class User {
         this.id = id;
     }
 
-    public String getHas_files() {
+    public String getHasFiles() {
         return has_files;
     }
 
-    public void setHas_files(String has_files) {
+    public void setHasFiles(String has_files) {
         this.has_files = has_files;
     }
 
-    public String getIs_owner() {
+    public String getIsOwner() {
         return is_owner;
     }
 
-    public void setIs_owner(String is_owner) {
+    public void setIsOwner(String is_owner) {
         this.is_owner = is_owner;
     }
 
-    public String getIs_admin() {
+    public String getIsAdmin() {
         return is_admin;
     }
 
-    public void setIs_admin(String is_admin) {
+    public void setIsAdmin(String is_admin) {
         this.is_admin = is_admin;
     }
 
-    public String getIs_primary_owner() {
+    public String getIsPrimaryOwner() {
         return is_primary_owner;
     }
 
-    public void setIs_primary_owner(String is_primary_owner) {
+    public void setIsPrimaryOwner(String is_primary_owner) {
         this.is_primary_owner = is_primary_owner;
     }
 
@@ -82,11 +82,11 @@ public class User {
         this.color = color;
     }
 
-    public String getIs_restricted() {
+    public String getIsRestricted() {
         return is_restricted;
     }
 
-    public void setIs_restricted(String is_restricted) {
+    public void setIsRestricted(String is_restricted) {
         this.is_restricted = is_restricted;
     }
 

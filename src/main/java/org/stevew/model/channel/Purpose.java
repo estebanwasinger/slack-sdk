@@ -6,7 +6,7 @@ package org.stevew.model.channel;
 public class Purpose {
     private String value;
 
-    private String last_set;
+    private String lastSet;
 
     private String creator;
 
@@ -18,12 +18,12 @@ public class Purpose {
         this.value = value;
     }
 
-    public String getLast_set() {
-        return last_set;
+    public String getLastSet() {
+        return lastSet;
     }
 
-    public void setLast_set(String last_set) {
-        this.last_set = last_set;
+    public void setLastSet(String lastSet) {
+        this.lastSet = lastSet;
     }
 
     public String getCreator() {

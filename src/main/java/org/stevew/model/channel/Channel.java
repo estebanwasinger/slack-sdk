@@ -1,10 +1,5 @@
 package org.stevew.model.channel;
 
-import org.stevew.SlackClient;
-import org.stevew.model.User;
-
-import java.util.List;
-
 /**
  * Created by estebanwasinger on 12/4/14.
  */
@@ -50,11 +45,11 @@ public class Channel {
         this.id = id;
     }
 
-    public String getIs_general() {
+    public String getIsGeneral() {
         return is_general;
     }
 
-    public void setIs_general(String is_general) {
+    public void setIsGeneral(String is_general) {
         this.is_general = is_general;
     }
 
@@ -66,11 +61,11 @@ public class Channel {
         this.created = created;
     }
 
-    public String getIs_member() {
+    public String getIsMember() {
         return is_member;
     }
 
-    public void setIs_member(String is_member) {
+    public void setIsMember(String is_member) {
         this.is_member = is_member;
     }
 
@@ -90,19 +85,19 @@ public class Channel {
         this.purpose = purpose;
     }
 
-    public String getNum_members() {
+    public String getNumMembers() {
         return num_members;
     }
 
-    public void setNum_members(String num_members) {
+    public void setNumMembers(String num_members) {
         this.num_members = num_members;
     }
 
-    public String getIs_archived() {
+    public String getIsArchived() {
         return is_archived;
     }
 
-    public void setIs_archived(String is_archived) {
+    public void setIsArchived(String is_archived) {
         this.is_archived = is_archived;
     }
 
@@ -114,11 +109,11 @@ public class Channel {
         this.members = members;
     }
 
-    public String getIs_channel() {
+    public String getIsChannel() {
         return is_channel;
     }
 
-    public void setIs_channel(String is_channel) {
+    public void setIsChannel(String is_channel) {
         this.is_channel = is_channel;
     }
 

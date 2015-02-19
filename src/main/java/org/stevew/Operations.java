@@ -4,6 +4,10 @@ package org.stevew;
  * Created by estebanwasinger on 12/5/14.
  */
 public class Operations {
+
+    private Operations() {
+    }
+
     public static final String USER_INFO = "users.info";
     public static final String USER_LIST = "users.list";
     public static final String CHANNELS_LIST = "channels.list";

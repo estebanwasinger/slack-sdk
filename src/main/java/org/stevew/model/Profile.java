@@ -26,11 +26,11 @@ public class Profile {
 
     private String skype;
 
-    public String getFirst_name() {
+    public String getFirstname() {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
+    public void setFirstname(String first_name) {
         this.first_name = first_name;
     }
 
@@ -42,11 +42,11 @@ public class Profile {
         this.phone = phone;
     }
 
-    public String getImage_32() {
+    public String getImage32() {
         return image_32;
     }
 
-    public void setImage_32(String image_32) {
+    public void setImage32(String image_32) {
         this.image_32 = image_32;
     }
 
@@ -58,51 +58,51 @@ public class Profile {
         this.email = email;
     }
 
-    public String getImage_192() {
+    public String getImage192() {
         return image_192;
     }
 
-    public void setImage_192(String image_192) {
+    public void setImage192(String image_192) {
         this.image_192 = image_192;
     }
 
-    public String getImage_72() {
+    public String getImage72() {
         return image_72;
     }
 
-    public void setImage_72(String image_72) {
+    public void setImage72(String image_72) {
         this.image_72 = image_72;
     }
 
-    public String getImage_24() {
+    public String getImage24() {
         return image_24;
     }
 
-    public void setImage_24(String image_24) {
+    public void setImage24(String image_24) {
         this.image_24 = image_24;
     }
 
-    public String getReal_name() {
+    public String getRealName() {
         return real_name;
     }
 
-    public void setReal_name(String real_name) {
+    public void setRealName(String real_name) {
         this.real_name = real_name;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLastName(String last_name) {
         this.last_name = last_name;
     }
 
-    public String getImage_48() {
+    public String getImage48() {
         return image_48;
     }
 
-    public void setImage_48(String image_48) {
+    public void setImage48(String image_48) {
         this.image_48 = image_48;
     }
 
