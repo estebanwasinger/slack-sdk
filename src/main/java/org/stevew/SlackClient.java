@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.stevew.exceptions.ChannelNotFoundException;
+import org.stevew.exceptions.UserNotFoundException;
 import org.stevew.model.User;
 import org.stevew.model.channel.Channel;
 import org.stevew.model.channel.Message;
@@ -59,8 +60,6 @@ public class SlackClient {
     }
 
     public User getUserInfo(String id) {
-        User user;
-
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.USER_INFO);
         request.addArgument("user", id);
@@ -68,8 +67,29 @@ public class SlackClient {
         String output = RestUtils.sendRequest(request);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("user");
-        user = mapper.fromJson(slackResponse.toString(), User.class);
-        return user;
+        return mapper.fromJson(slackResponse.toString(), User.class);
+    }
+
+    public User getUserInfoByName(String username) throws UserNotFoundException {
+        List<User> list = getUserList();
+        for (User user : list) {
+            if (user.getName().equals(username)) {
+                return user;
+            }
+        }
+        throw new UserNotFoundException("The user: " + username + " does not exist, please check the name!");
+    }
+
+    public List<User> getUserList() {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.USER_LIST);
+
+        String output = RestUtils.sendRequest(request);
+
+        JSONArray slackResponse = (JSONArray) new JSONObject(output).get("members");
+        Type listType = new TypeToken<ArrayList<User>>() {
+        }.getType();
+        return mapper.fromJson(slackResponse.toString(), listType);
     }
 
     public Channel getChannelByName(String name) {
