@@ -14,6 +14,8 @@ import org.stevew.model.User;
 import org.stevew.model.channel.Channel;
 import org.stevew.model.channel.Message;
 import org.stevew.model.chat.MessageResponse;
+import org.stevew.model.im.DirectMessageChannel;
+import org.stevew.model.im.DirectMessageChannelCreationResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,9 +23,6 @@ import java.util.List;
 
 public class SlackClient {
 
-    /*
-    This SDK don't support OAuth dance by the moment
-     */
     private String token;
     private Gson mapper;
 
@@ -112,18 +111,7 @@ public class SlackClient {
     }
 
     public List<Message> getChannelHistory(String channelId, String latest, String oldest, String count) {
-        SlackRequest request = createAuthorizedRequest();
-        request.setOperation(Operations.CHANNELS_HISTORY);
-        request.addArgument("channel", channelId);
-        request.addArgument("latest", latest);
-        request.addArgument("oldest", oldest);
-        request.addArgument("count", count);
-        String output = RestUtils.sendRequest(request);
-
-        JSONArray slackResponse = (JSONArray) new JSONObject(output).get("messages");
-        Type listType = new TypeToken<ArrayList<Message>>() {
-        }.getType();
-        return mapper.fromJson(slackResponse.toString(), listType);
+        return getMessages(channelId, latest, oldest, count, Operations.CHANNELS_HISTORY);
     }
 
     public Channel createChannel(String channelName) {
@@ -167,20 +155,23 @@ public class SlackClient {
         return new JSONObject(output).getBoolean("ok");
     }
 
-    public String openDirectMessageChannel(String userId) {
+    public DirectMessageChannelCreationResponse openDirectMessageChannel(String userId) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.IM_OPEN);
         request.addArgument("user", userId);
         String output = RestUtils.sendRequest(request);
-        return output;
+        JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
+        return mapper.fromJson(slackResponse.toString(), DirectMessageChannelCreationResponse.class);
     }
 
-    public String listDirectMessageChannels() {
+    public List<DirectMessageChannel> getDirectMessageChannelsList() {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.IM_LIST);
-        request.enablePretty();
         String output = RestUtils.sendRequest(request);
-        return output;
+        JSONArray slackResponse = (JSONArray) new JSONObject(output).get("ims");
+        Type listType = new TypeToken<ArrayList<DirectMessageChannel>>() {
+        }.getType();
+        return mapper.fromJson(slackResponse.toString(), listType);
     }
 
     public Channel joinChannel(String channelName) {
@@ -193,21 +184,31 @@ public class SlackClient {
         return mapper.fromJson(slackResponse.toString(), Channel.class);
     }
 
-    public String deleteMessage(String timeStamp, String channelId) {
+    public Boolean deleteMessage(String timeStamp, String channelId) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHAT_DELETE);
         request.addArgument("channel", channelId);
         request.addArgument("ts", timeStamp);
-        return RestUtils.sendRequest(request);
+        String output = RestUtils.sendRequest(request);
+        return true;
     }
 
-    public String updateMessage(String timeStamp, String channelId, String message) {
+    public Boolean updateMessage(String timeStamp, String channelId, String message) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHAT_UPDATE);
         request.addArgument("channel", channelId);
         request.addArgument("text", message);
         request.addArgument("ts", timeStamp);
-        return RestUtils.sendRequest(request);
+        String output = RestUtils.sendRequest(request);
+        return true;
+    }
+
+    public List<Message> getDirectChannelHistory(String channelId, String latest, String oldest, String count) {
+        return getMessages(channelId, latest, oldest, count, Operations.IM_HISTORY);
+    }
+
+    public List<Message> getGroupHistory(String channelId, String latest, String oldest, String count) {
+        return getMessages(channelId, latest, oldest, count, Operations.GROUPS_HISTORY);
     }
 
     private String getURL(String operation) {
@@ -216,5 +217,19 @@ public class SlackClient {
 
     private SlackRequest createAuthorizedRequest() {
         return RestUtils.newRequest(token);
+    }
+
+    private List<Message> getMessages(String channelId, String latest, String oldest, String count, String operation) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(operation);
+        request.addArgument("channel", channelId);
+        request.addArgument("latest", latest);
+        request.addArgument("oldest", oldest);
+        request.addArgument("count", count);
+        String output = RestUtils.sendRequest(request);
+        JSONArray slackResponse = (JSONArray) new JSONObject(output).get("messages");
+        Type listType = new TypeToken<ArrayList<Message>>() {
+        }.getType();
+        return mapper.fromJson(slackResponse.toString(), listType);
     }
 }

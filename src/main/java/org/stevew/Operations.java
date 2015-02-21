@@ -23,4 +23,6 @@ public class Operations {
     public static final String CHAT_UPDATE = "chat.update";
     public static final String IM_OPEN = "im.open";
     public static final String IM_LIST = "im.list";
+    public static final String IM_HISTORY = "im.history";
+    public static final String GROUPS_HISTORY = "groups.history";
 }

@@ -35,8 +35,11 @@ public class RestUtils {
             throw new RuntimeException("Failed : HTTP error code : "
                     + response.getStatus());
         }
+        String output = response.getEntity(String.class);
 
-        return response.getEntity(String.class);
+        ErrorHandler.verifyResponse(output);
+
+        return output;
     }
 
 
