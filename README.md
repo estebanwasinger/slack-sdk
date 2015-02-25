@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/estebanwasinger/slack-sdk.svg?branch=master)](https://travis-ci.org/estebanwasinger/slack-sdk)
+![Build Status](https://circleci.com/gh/estebanwasinger/slack-sdk.png?circle-token=25024098458337d2283406707c9f416bf10eebe5)
 
 # Slack Java SDK
 
