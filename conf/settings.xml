@@ -1,0 +1,22 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <interactiveMode/>
+    <localRepository>${user.home}/.m2/repository</localRepository>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jdbc.url>${sonar_jdbc_url}</sonar.jdbc.url>
+                <sonar.jdbc.username>${sonar_jdbc_username}</sonar.jdbc.username>
+                <sonar.jdbc.password>${sonar_jdbc_password}</sonar.jdbc.password>
+                <sonar.login>${sonar_login}</sonar.login>
+                <sonar.password>${sonar_password}</sonar.password>
+                <sonar.host.url>${sonar_host_url}</sonar.host.url>
+            </properties>
+        </profile>
+
+    </profiles>
+</settings>
