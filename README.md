@@ -1,4 +1,4 @@
-![Build Status](https://circleci.com/gh/estebanwasinger/slack-sdk.png?circle-token=25024098458337d2283406707c9f416bf10eebe5)
+[![Circle CI](https://circleci.com/gh/estebanwasinger/slack-sdk.svg?style=svg)](https://circleci.com/gh/estebanwasinger/slack-sdk)
 
 # Slack Java SDK
 
