@@ -25,4 +25,10 @@ public class Operations {
     public static final String IM_LIST = "im.list";
     public static final String IM_HISTORY = "im.history";
     public static final String GROUPS_HISTORY = "groups.history";
+    public static final String GROUPS_LIST = "groups.list";
+    public static final String GROUPS_CREATE = "groups.create";
+    public static final String GROUPS_LEAVE = "groups.leave";
+    public static final String GROUPS_ARCHIVE = "groups.archive";
+    public static final String GROUPS_OPEN = "groups.open";
+    public static final String FILES_UPLOAD = "files.upload";
 }
