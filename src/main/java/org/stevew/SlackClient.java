@@ -132,6 +132,36 @@ public class SlackClient {
         throw new ChannelNotFoundException("Channel: " + name + " does not exist.");
     }
 
+    public Boolean setChannelPurpose(String channelID, String purpose) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_SETPURPOSE);
+        request.addArgument("channel", channelID);
+        request.addArgument("purpose", purpose);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean setChannelTopic(String channelID, String topic) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_SETTOPIC);
+        request.addArgument("channel", channelID);
+        request.addArgument("topic", topic);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean markViewChannel(String channelID, String timeStamp) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_MARK);
+        request.addArgument("channel", channelID);
+        request.addArgument("ts", timeStamp);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
     //******************
     // User methods
     //******************
@@ -190,7 +220,7 @@ public class SlackClient {
         request.addArgument("channel", channelId);
         request.addArgument("ts", timeStamp);
         String output = RestUtils.sendRequest(request);
-        return true;
+        return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean updateMessage(String timeStamp, String channelId, String message) {
@@ -200,7 +230,7 @@ public class SlackClient {
         request.addArgument("text", message);
         request.addArgument("ts", timeStamp);
         String output = RestUtils.sendRequest(request);
-        return true;
+        return new JSONObject(output).getBoolean("ok");
     }
 
     //******************
@@ -229,6 +259,27 @@ public class SlackClient {
     public List<Message> getDirectChannelHistory(String channelId, String latest, String oldest, String count) {
         return getMessages(channelId, latest, oldest, count, Operations.IM_HISTORY);
     }
+
+    public Boolean markViewDirectMessageChannel(String channelID, String timeStamp) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.IM_MARK);
+        request.addArgument("channel", channelID);
+        request.addArgument("ts", timeStamp);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean closeDirectMessageChannel(String channelID) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.IM_CLOSE);
+        request.addArgument("channel", channelID);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+    
+    
 
     //******************
     // Group methods
@@ -286,9 +337,49 @@ public class SlackClient {
         return new JSONObject(output).getBoolean("ok");
     }
 
-    //************
+    public Boolean setGroupPurpose(String channelID, String purpose) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_SETPORPUSE);
+        request.addArgument("channel", channelID);
+        request.addArgument("purpose", purpose);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean setGroupTopic(String channelID, String topic) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_SETTOPIC);
+        request.addArgument("channel", channelID);
+        request.addArgument("topic", topic);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean closeGroup(String channelID) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_CLOSE);
+        request.addArgument("channel", channelID);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean markViewGroup(String channelID, String timeStamp) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_MARK);
+        request.addArgument("channel", channelID);
+        request.addArgument("ts", timeStamp);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+
+    //******************
     // File methods
-    //************
+    //******************
 
     public String sendFile(String channelId, String fileName, String fileType, String title, String initialComment, String filePath) throws IOException {
         SlackRequest request = createAuthorizedRequest();
@@ -303,16 +394,13 @@ public class SlackClient {
         if (!file.exists()) {
             throw new IOException("File " + file.getAbsolutePath() + " does not exist!");
         }
-
-        String output = RestUtils.sendAttachmentRequest(request, file);
-
-
-        return output;
+        
+        return RestUtils.sendAttachmentRequest(request, file);
     }
 
-    //************
+    //******************
     // Util methods
-    //************
+    //******************
 
     public List<Message> getMessages(String channelId, String latest, String oldest, String count, String operation) {
         SlackRequest request = createAuthorizedRequest();

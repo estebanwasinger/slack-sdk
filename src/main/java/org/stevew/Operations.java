@@ -17,12 +17,17 @@ public class Operations {
     public static final String CHANNELS_RENAME = "channels.rename";
     public static final String CHANNELS_JOIN = "channels.join";
     public static final String CHANNELS_LEAVE = "channels.leave";
+    public static final String CHANNELS_SETPURPOSE = "channels.setPurpose";
+    public static final String CHANNELS_SETTOPIC= "channels.setTopic";
+    public static final String CHANNELS_MARK= "channels.mark";
     public static final String AUTH_TEST = "auth.test";
     public static final String CHAT_POSTMESSAGE = "chat.postMessage";
     public static final String CHAT_DELETE = "chat.delete";
     public static final String CHAT_UPDATE = "chat.update";
     public static final String IM_OPEN = "im.open";
     public static final String IM_LIST = "im.list";
+    public static final String IM_MARK = "im.mark";
+    public static final String IM_CLOSE = "im.close";
     public static final String IM_HISTORY = "im.history";
     public static final String GROUPS_HISTORY = "groups.history";
     public static final String GROUPS_LIST = "groups.list";
@@ -30,5 +35,9 @@ public class Operations {
     public static final String GROUPS_LEAVE = "groups.leave";
     public static final String GROUPS_ARCHIVE = "groups.archive";
     public static final String GROUPS_OPEN = "groups.open";
+    public static final String GROUPS_SETPORPUSE = "groups.setPurpose";
+    public static final String GROUPS_SETTOPIC= "groups.setTopic";
+    public static final String GROUPS_MARK= "groups.mark";
+    public static final String GROUPS_CLOSE= "groups.close";
     public static final String FILES_UPLOAD = "files.upload";
 }
