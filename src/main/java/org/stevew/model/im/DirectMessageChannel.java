@@ -1,56 +1,113 @@
 package org.stevew.model.im;
 
-/**
- * Created by estebanwasinger on 2/21/15.
- */
+import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Generated("org.jsonschema2pojo")
 public class DirectMessageChannel {
+
+    @Expose
     private String id;
-
-    private String created;
-
-    private String is_im;
-
+    @SerializedName("is_im")
+    @Expose
+    private Boolean isIm;
+    @Expose
     private String user;
+    @Expose
+    private Integer created;
+    @SerializedName("is_user_deleted")
+    @Expose
+    private Boolean isUserDeleted;
 
-    private String is_user_deleted;
-
+    /**
+     *
+     * @return
+     * The id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     * The id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getCreated() {
-        return created;
+    /**
+     *
+     * @return
+     * The isIm
+     */
+    public Boolean getIsIm() {
+        return isIm;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    /**
+     *
+     * @param isIm
+     * The is_im
+     */
+    public void setIsIm(Boolean isIm) {
+        this.isIm = isIm;
     }
 
-    public String getIs_im() {
-        return is_im;
-    }
-
-    public void setIs_im(String is_im) {
-        this.is_im = is_im;
-    }
-
+    /**
+     *
+     * @return
+     * The user
+     */
     public String getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     * The user
+     */
     public void setUser(String user) {
         this.user = user;
     }
 
-    public String getIs_user_deleted() {
-        return is_user_deleted;
+    /**
+     *
+     * @return
+     * The created
+     */
+    public Integer getCreated() {
+        return created;
     }
 
-    public void setIs_user_deleted(String is_user_deleted) {
-        this.is_user_deleted = is_user_deleted;
+    /**
+     *
+     * @param created
+     * The created
+     */
+    public void setCreated(Integer created) {
+        this.created = created;
     }
+
+    /**
+     *
+     * @return
+     * The isUserDeleted
+     */
+    public Boolean getIsUserDeleted() {
+        return isUserDeleted;
+    }
+
+    /**
+     *
+     * @param isUserDeleted
+     * The is_user_deleted
+     */
+    public void setIsUserDeleted(Boolean isUserDeleted) {
+        this.isUserDeleted = isUserDeleted;
+    }
+
 }

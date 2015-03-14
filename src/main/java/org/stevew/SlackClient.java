@@ -12,8 +12,9 @@ import org.stevew.exceptions.ChannelNotFoundException;
 import org.stevew.exceptions.UserNotFoundException;
 import org.stevew.model.User;
 import org.stevew.model.channel.Channel;
-import org.stevew.model.channel.Message;
+import org.stevew.model.chat.Message;
 import org.stevew.model.chat.MessageResponse;
+import org.stevew.model.file.FileUploadResponse;
 import org.stevew.model.group.Group;
 import org.stevew.model.im.DirectMessageChannel;
 import org.stevew.model.im.DirectMessageChannelCreationResponse;
@@ -162,6 +163,44 @@ public class SlackClient {
         return new JSONObject(output).getBoolean("ok");
     }
 
+    public Boolean kickUserFromChannel(String channelID, String user){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_KICK);
+        request.addArgument("channel", channelID);
+        request.addArgument("user", user);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean inviteUserToChannel(String channelID, String user){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_INVITE);
+        request.addArgument("channel", channelID);
+        request.addArgument("user", user);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean unarchiveChannel(String channelID){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_UNARCHIVE);
+        request.addArgument("channel", channelID);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean archiveChannel(String channelID) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHANNELS_ARCHIVE);
+        request.addArgument("channel", channelID);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
     //******************
     // User methods
     //******************
@@ -278,8 +317,7 @@ public class SlackClient {
 
         return new JSONObject(output).getBoolean("ok");
     }
-    
-    
+
 
     //******************
     // Group methods
@@ -376,12 +414,41 @@ public class SlackClient {
         return new JSONObject(output).getBoolean("ok");
     }
 
+    public Boolean kickUserFromGroup(String channelID, String user){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_KICK);
+        request.addArgument("channel", channelID);
+        request.addArgument("user", user);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean inviteUserToGroup(String channelID, String user){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_INVITE);
+        request.addArgument("channel", channelID);
+        request.addArgument("user", user);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
+    public Boolean unarchiveGroup(String groupID){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_UNARCHIVE);
+        request.addArgument("channel", groupID);
+        String output = RestUtils.sendRequest(request);
+
+        return new JSONObject(output).getBoolean("ok");
+    }
+
 
     //******************
     // File methods
     //******************
 
-    public String sendFile(String channelId, String fileName, String fileType, String title, String initialComment, String filePath) throws IOException {
+    public FileUploadResponse sendFile(String channelId, String fileName, String fileType, String title, String initialComment, String filePath) throws IOException {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.FILES_UPLOAD);
         request.addArgument("channels", channelId);
@@ -394,8 +461,10 @@ public class SlackClient {
         if (!file.exists()) {
             throw new IOException("File " + file.getAbsolutePath() + " does not exist!");
         }
-        
-        return RestUtils.sendAttachmentRequest(request, file);
+
+        String stringResponse = RestUtils.sendAttachmentRequest(request, file);
+
+        return mapper.fromJson(new JSONObject(stringResponse).getJSONObject("file").toString(),FileUploadResponse.class);
     }
 
     //******************

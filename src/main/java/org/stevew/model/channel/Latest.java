@@ -1,14 +1,13 @@
 
-package org.stevew.model.chat;
+package org.stevew.model.channel;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
-import org.stevew.model.channel.Attachment;
 
 @Generated("org.jsonschema2pojo")
-public class Message {
+public class Latest {
 
     @Expose
     private String type;
