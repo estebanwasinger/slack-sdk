@@ -14,6 +14,7 @@ import org.stevew.model.User;
 import org.stevew.model.channel.Channel;
 import org.stevew.model.chat.Message;
 import org.stevew.model.chat.MessageResponse;
+import org.stevew.model.chat.attachment.ChatAttachment;
 import org.stevew.model.file.FileUploadResponse;
 import org.stevew.model.group.Group;
 import org.stevew.model.im.DirectMessageChannel;
@@ -21,6 +22,7 @@ import org.stevew.model.im.DirectMessageChannelCreationResponse;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -253,6 +255,21 @@ public class SlackClient {
         return mapper.fromJson(output, MessageResponse.class);
     }
 
+    public MessageResponse sendMessageWithAttachment(String message, String channelId, String username, String iconUrl,ChatAttachment chatAttachment) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.CHAT_POSTMESSAGE);
+        request.addArgument("channel", channelId);
+        request.addArgument("text", message);
+        request.addArgument("username", username);
+        request.addArgument("icon_url", iconUrl);
+        ArrayList<ChatAttachment> chatAttachmentArrayList = new ArrayList<ChatAttachment>();
+        chatAttachmentArrayList.add(chatAttachment);
+        request.addArgument("attachments",mapper.toJson(chatAttachmentArrayList));
+        System.out.println(mapper.toJson(chatAttachmentArrayList));
+        String output = RestUtils.sendRequest(request);
+        return mapper.fromJson(output, MessageResponse.class);
+    }
+
     public Boolean deleteMessage(String timeStamp, String channelId) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHAT_DELETE);
@@ -443,10 +460,36 @@ public class SlackClient {
         return new JSONObject(output).getBoolean("ok");
     }
 
+    public Channel renameGroup(String channelId, String newName) {
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.GROUPS_RENAME);
+        request.addArgument("channel", channelId);
+        request.addArgument("name", newName);
+        String output = RestUtils.sendRequest(request);
+
+        JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
+        return mapper.fromJson(slackResponse.toString(), Channel.class);
+    }
+
 
     //******************
     // File methods
     //******************
+    //TODO -- Delete duplicated code
+    public FileUploadResponse sendFile(String channelId, String fileName, String fileType, String title, String initialComment, InputStream file){
+        SlackRequest request = createAuthorizedRequest();
+        request.setOperation(Operations.FILES_UPLOAD);
+        request.addArgument("channels", channelId);
+        request.addArgument("filename", fileName);
+        request.addArgument("filetype", fileType);
+        request.addArgument("title", title);
+        request.addArgument("initial_comment", initialComment);
+
+
+        String stringResponse = RestUtils.sendAttachmentRequest(request, file);
+
+        return mapper.fromJson(new JSONObject(stringResponse).getJSONObject("file").toString(),FileUploadResponse.class);
+    }
 
     public FileUploadResponse sendFile(String channelId, String fileName, String fileType, String title, String initialComment, String filePath) throws IOException {
         SlackRequest request = createAuthorizedRequest();
