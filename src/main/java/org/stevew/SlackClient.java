@@ -244,24 +244,26 @@ public class SlackClient {
     // Chat methods
     //******************
 
-    public MessageResponse sendMessage(String message, String channelId, String username, String iconUrl) {
+    public MessageResponse sendMessage(String message, String channelId, String username, String iconUrl, Boolean asUser) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHAT_POSTMESSAGE);
         request.addArgument("channel", channelId);
         request.addArgument("text", message);
         request.addArgument("username", username);
         request.addArgument("icon_url", iconUrl);
+        request.addArgument("as_user", String.valueOf(asUser));
         String output = RestUtils.sendRequest(request);
         return mapper.fromJson(output, MessageResponse.class);
     }
 
-    public MessageResponse sendMessageWithAttachment(String message, String channelId, String username, String iconUrl,ChatAttachment chatAttachment) {
+    public MessageResponse sendMessageWithAttachment(String message, String channelId, String username, String iconUrl,ChatAttachment chatAttachment, Boolean asUser) {
         SlackRequest request = createAuthorizedRequest();
         request.setOperation(Operations.CHAT_POSTMESSAGE);
         request.addArgument("channel", channelId);
         request.addArgument("text", message);
         request.addArgument("username", username);
         request.addArgument("icon_url", iconUrl);
+        request.addArgument("as_user", String.valueOf(asUser));
         ArrayList<ChatAttachment> chatAttachmentArrayList = new ArrayList<ChatAttachment>();
         chatAttachmentArrayList.add(chatAttachment);
         request.addArgument("attachments",mapper.toJson(chatAttachmentArrayList));
